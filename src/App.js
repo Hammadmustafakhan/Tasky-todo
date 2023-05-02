@@ -4,6 +4,7 @@ import { RiQuillPenLine } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiX } from "react-icons/fi";
+import Swal from "sweetalert2";
 
 const inLocalStorage = () => {
   let inLocal = localStorage.getItem("list");
@@ -55,16 +56,37 @@ const App = () => {
     setinput("");
     setindex(-1);
   };
+
+
   const removeAll = () => {
-    setitem([]);
-    setinput("");
+  
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete all tasks?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "green",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setitem([]);
+        setinput("");
+      }
+    });
   };
+
+
+
+
+
+
 
   return (
     <div>
       <div className="navcontaimmer">
         <div className="nav">
-          <h2>
+          <h2 className="heading">
             Tasky Todo... <RiQuillPenLine />{" "}
           </h2>
         </div>
